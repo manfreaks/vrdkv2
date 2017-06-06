@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>360&deg; Image Gallery</title>
+    <meta name="description" content="360&deg; Image Gallery - A-Frame">
+    <script src="aframe.min.js"></script>
+    <script src="aframe-animation-component@3.0.1"></script>
+    <script src="aframe-event-set-component@3.0.1"></script>
+    <script src="aframe-layout-component@3.0.1"></script>
+    <script src="aframe-template-component@3.1.1"></script>
+    <script src="components/set-image.js"></script>
+    <script src="tour.js"></script>
+    <script src="hotspot.js"></script>
+    <script src="panorama.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-assets>                   
+        
+        <img id="city-thumb" crossorigin="anonymous" src="thumb-city.jpg">
+        <img id="cubes-thumb" crossorigin="anonymous" src="thumb-cubes.jpg">
+       
+        <img id="bannerlogo-thumb" crossorigin="anonymous" src="bannerlogokecildkv.jpg">
+         <img id="bannerlogo-thumb2" crossorigin="anonymous" src="bannerlogokecildkv.jpg">
+         <img id="galeri-thumb1" crossorigin="anonymous" src="thumbnail360/gambar1.jpg">
+        <img id="galeri-thumb1" crossorigin="anonymous" src="thumbnail360/gambar1.jpg">
+        <img id="galeri-thumb2" crossorigin="anonymous" src="thumbnail360/gambar2.jpg">
+        <img id="galeri-thumb3" crossorigin="anonymous" src="thumbnail360/gambar3.jpg">
+        <img id="galeri-thumb4" crossorigin="anonymous" src="thumbnail360/gambar4.jpg">
+        <img id="galeri-thumb5" crossorigin="anonymous" src="thumbnail360/gambar5.jpg">
+       
+        <img id="sechelt-thumb" crossorigin="anonymous" src="thumb-sechelt.jpg">
+        <audio id="click-sound" crossorigin="anonymous" src="click.ogg"></audio>
+        <img id="city" src="puydesancy.jpg"> 
+        <img id="bannerlogo" src="bannerlogokecildkv.jpg">
+        <img id="bannerlogo2" src="bannerlogokecildkv.jpg">
+        <img id="galeri1" src="gambar360/gambar1.jpg">
+        <img id="galeri2" src="gambar360/gambar2.jpg">
+        <img id="galeri3" src="gambar360/gambar3.jpg">
+        <img id="galeri4" src="gambar360/gambar4.jpg">
+        <img id="galeri5" src="gambar360/gambar5.jpg">
+        
+        <img id="cubes" src="cubes.jpg">
+        <img id="sechelt" src="sechelt.jpg">
+
+ 
+        
+        <!-- Image link template to be reused. -->
+        <script id="link" type="text/html">
+          <a-entity class="link"
+            geometry="primitive: plane; height: 1; width: 1"
+            material="shader: flat; src: ${thumb}"
+            event-set__1="_event: mousedown; scale: 1 1 1"
+            event-set__2="_event: mouseup; scale: 1.2 1.2 1"
+            event-set__3="_event: mouseenter; scale: 1.2 1.2 1"
+            event-set__4="_event: mouseleave; scale: 1 1 1"
+            set-image="on: click; target: #image-360; src: ${src}"
+            sound="on: click; src: #click-sound"></a-entity>
+        </script>
+      </a-assets>
+
+      <!-- 360-degree image. -->
+      <a-sky id="image-360" radius="10" src="#city"></a-sky>
+
+      <!-- Image links. -->           
+      
+
+  
+
+      <a-entity id="links" layout="type: line; margin: 1.5;" position="-2 1 -2" rotation="0 40 0">
+        <a-entity template="src: #link" data-src="" data-thumb="#bannerlogo-thumb"></a-entity>
+
+
+    <!-- <a-entity id="links" layout="type: line; margin: 1.5" position="-2 -1 2" rotation="0 130 0">
+        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+                -->
+      </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="2 1 -2" rotation="0 -40 0">
+        <a-entity template="src: #link" data-src="" data-thumb="#bannerlogo-thumb2"></a-entity>
+        
+      </a-entity>      
+      
+      </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="-2 -1 -2" rotation="0 0 0">
+        <a-entity template="src: #link" data-src="#galeri1" data-thumb="#galeri-thumb1"></a-entity>
+   </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="-1 -1 -2" rotation="0 0 0">
+        <a-entity template="src: #link" data-src="#galeri2" data-thumb="#galeri-thumb2"></a-entity>
+   </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -2" rotation="0 0 0">
+        <a-entity template="src: #link" data-src="#galeri3" data-thumb="#galeri-thumb3"></a-entity>
+   </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="1 -1 -2" rotation="0 0 0">
+        <a-entity template="src: #link" data-src="#galeri4" data-thumb="#galeri-thumb4"></a-entity>
+   </a-entity>
+        <a-entity id="links" layout="type: line; margin: 1.5" position="2 -1 -2" rotation="0 0 0">
+        <a-entity template="src: #link" data-src="#galeri5" data-thumb="#galeri-thumb5"></a-entity>
+        
+      </a-entity>  
+      
+      
+      
+  
+      <!-- Camera + cursor. -->
+      <a-entity camera look-controls>
+        <a-cursor id="cursor"
+          animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"
+          animation__fusing="property: fusing; startEvents: fusing; from: 1 1 1; to: 0.1 0.1 0.1; dur: 1500"
+          event-set__1="_event: mouseenter; color: springgreen"
+          event-set__2="_event: mouseleave; color: black"
+          fuse="true"
+          raycaster="objects: .link"></a-cursor>
+      </a-entity>
+    </a-scene>      
+  </body>
+</html>
